@@ -38,6 +38,7 @@ Each morning the orchestrator reads new offers, discards those that fail a hard 
 | Weighted scoring dimensions | 6 |
 | Security test battery | 6 tests |
 | Build incidents documented, each with root cause and fix | 16 |
+| Incidents found in operation since then | 1 (open) |
 
 ## Repository map
 
