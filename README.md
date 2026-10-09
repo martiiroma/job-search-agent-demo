@@ -44,7 +44,7 @@ Each morning the orchestrator reads new offers, discards those that fail a hard 
 | Path | What it holds |
 |---|---|
 | `knowledge/` | The documents the agent reads before acting |
-| `CLAUDE.md` | The orchestrator: the daily flow, step by step |
+| CLAUDE.md | The orchestrator: what the agent does each morning |
 | `.claude/agents/` | The reviewer subagent |
 | `.claude/hooks/` | The guard hook |
 | `tests/` | The security test battery |
