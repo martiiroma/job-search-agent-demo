@@ -19,26 +19,12 @@ Four decisions shape everything in this repository:
 
 ```mermaid
 flowchart LR
-    subgraph Knowledge["Knowledge — what the agent knows"]
-        CV[CV master<br/>verified claims]
-        PR[Profile<br/>hard filters]
-        RU[Rubric<br/>weighted scoring]
-        VO[Voice<br/>letter rules]
-        SO[Sources]
-        AP[Anti-patterns]
-    end
-
-    subgraph Behaviour["Behaviour — what the agent does"]
-        OR[Orchestrator<br/>CLAUDE.md]
-        RV[Reviewer<br/>subagent]
-        HK[Guard hook<br/>guard.py]
-    end
-
-    IN[Job offers<br/>inbox] --> OR
-    Knowledge --> OR
-    OR --> RV
-    RV -->|approved| OUT[Draft CV + letter<br/>for the human]
-    HK -. denies forbidden actions .-> OR
+    IN["Job offers<br/>(inbox)"] --> OR
+    KB["Knowledge base · 7 documents<br/>CV · profile · rubric · voice<br/>sources · anti-patterns · state"] --> OR
+    OR["Orchestrator<br/>CLAUDE.md"] --> RV["Reviewer<br/>subagent"]
+    RV -->|approved| OUT["Draft CV + letter<br/>for the human"]
+    RV -.->|rejected: fix and retry| OR
+    HK["Guard hook<br/>guard.py"] -.->|denies forbidden actions| OR
 ```
 
 Each morning the orchestrator reads new offers, discards those that fail a hard filter, scores the rest, and drafts documents for the ones above the threshold. A reviewer subagent checks every draft against the written rules before it reaches me. A guard hook blocks the actions the agent must never take, such as sending an email.
@@ -47,7 +33,7 @@ Each morning the orchestrator reads new offers, discards those that fail a hard 
 
 | | |
 |---|---|
-| Knowledge documents | 8 |
+| Markdown documents (7 of knowledge + 1 orchestrator) | 8 |
 | Hard filters | 10 |
 | Weighted scoring dimensions | 6 |
 | Security test battery | 6 tests |
